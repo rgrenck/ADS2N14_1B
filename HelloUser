@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class HelloUser {
+	
+	private static Scanner scan;
+
+	public static void main(String[] args) {
+		
+		System.out.println("Digite o seu nome de usuário: "); 
+		scan = new Scanner(System.in); 
+		String nameUser = scan.next(); 
+		System.out.println("Hello" + " " + nameUser + "!"); 
+	   }
+
+	}
