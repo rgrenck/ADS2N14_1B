@@ -1,0 +1,43 @@
+
+import java.io.PrintWriter;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+@RunWith(JUnit4.class)
+public class TestesTravessiaDeserto{
+	private TravessiaDeserto jogo = null;
+
+	@Before
+	public void setUp() {
+		System.out.println("inicio");
+
+		jogo = new TravessiaDeserto();
+		jogo.inicializa();
+		
+		@Test
+	public void testAvancar(){
+		int posicao_anterior = jogo.getPos();
+		int combustivel_anterior = jogo.getCombustivel();
+		jogo.avancar();
+		assertEquals(posicao_anterior + 1, jogo.getPosicao());
+		assertEquals(combustivel_anterior - 1,jogo.getCombustivel());
+		jogo.voltar();
+		assertEquals(0, jogo.getPosicao());
+		do{
+			jogo.avancar();
+		}while(jogo.getCombustivel() != 0);
+		jogo.avancar();
+		assertEquals(jogo.Tanque, jogo.getPos());
+	}
+	
+	@After
+	public void tearDown() {
+		System.out.println("final");
+		jogo = null;
+
+	}
