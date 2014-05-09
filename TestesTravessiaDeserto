@@ -1,12 +1,13 @@
+package TestesTravessiaDeserto;
 
-import java.io.PrintWriter;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class TestesTravessiaDeserto{
@@ -17,23 +18,42 @@ public class TestesTravessiaDeserto{
 		System.out.println("inicio");
 
 		jogo = new TravessiaDeserto();
-		jogo.inicializa();
+	}
 		
-		@Test
+		
+	@Test
 	public void testAvancar(){
-		int posicao_anterior = jogo.getPos();
-		int combustivel_anterior = jogo.getCombustivel();
+		int posicaoAnterior = jogo.getPosicao();
+		int combustivelAnterior = jogo.getCombustivel();
 		jogo.avancar();
-		assertEquals(posicao_anterior + 1, jogo.getPosicao());
-		assertEquals(combustivel_anterior - 1,jogo.getCombustivel());
+		assertEquals(posicaoAnterior + 1, jogo.getPosicao());
+		assertEquals(combustivelAnterior - 1,jogo.getCombustivel());
 		jogo.voltar();
 		assertEquals(0, jogo.getPosicao());
 		do{
 			jogo.avancar();
 		}while(jogo.getCombustivel() != 0);
 		jogo.avancar();
-		assertEquals(jogo.Tanque, jogo.getPos());
+		assertEquals(jogo.capacidadeCombustivel, jogo.getPosicao());
 	}
+	
+	
+	@Test
+	public void testVoltar(){
+		assertEquals(0, jogo.getPosicao());
+		jogo.voltar();
+		assertEquals(0, jogo.getPosicao());
+		assertEquals(TravessiaDeserto.capacidadeCombustivel, jogo.getCombustivel());
+		assertEquals((TravessiaDeserto.capacidadeCombustivel),jogo.getCombustivel());
+		jogo.avancar();
+		jogo.avancar();
+		int posicaoAnterior = jogo.getPosicao();
+		int combustivelAnterior = jogo.getCombustivel();
+		jogo.voltar();
+		assertEquals((posicaoAnterior - 1), jogo.getPosicao()); 
+		assertEquals((combustivelAnterior - 1),jogo.getCombustivel()); 	
+	}
+	
 	
 	@After
 	public void tearDown() {
@@ -41,3 +61,6 @@ public class TestesTravessiaDeserto{
 		jogo = null;
 
 	}
+
+
+}
